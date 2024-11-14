@@ -1,0 +1,21 @@
+{
+    "name": "phuonght/helper-document",
+    "description": "Hepler for document",
+    "type": "library",
+    "keywords": [
+        "laravel"
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Helpers\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Hoàng Trọng Phương",
+            "email": "hoangphuong.work01@gmail.com"
+        }
+    ],
+    "require": {}
+}
