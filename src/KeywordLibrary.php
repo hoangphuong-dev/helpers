@@ -45,28 +45,24 @@ class KeywordLibrary
      */
     public static function searchKeyword($key, $title): string
     {
-        //Bẻ từ khóa để bôi đậm.
-        $search_text       = mb_strtolower(Formatter::removeAccent($key), "UTF-8");
-        $title_lower       = mb_strtolower(Formatter::removeAccent($title), 'UTF-8');
-        $search_text_array = explode(" ", $search_text);
-        $search_text_array = array_unique($search_text_array);
+        $search_text = mb_strtolower(Formatter::removeAccent($key), "UTF-8");
+        $title_lower = mb_strtolower(Formatter::removeAccent($title), "UTF-8");
 
-        $arrTitle      = explode(' ', $title);
+        $search_text_array = array_unique(explode(" ", $search_text));
+
+        $arrTitle = explode(' ', $title);
         $arrTitleLower = explode(' ', $title_lower);
-        $strRet        = '';
 
-        for ($i = 0, $iMax = count($arrTitleLower); $i < $iMax; $i++) {
-            if (in_array($arrTitleLower[$i], $search_text_array)) {
-                $strRet .= '<b>' . $arrTitle[$i] . '</b> ';
+        $marked_title = [];
+        foreach ($arrTitleLower as $index => $word) {
+            if (in_array($word, $search_text_array)) {
+                $marked_title[] = '<mark data-markjs="true">' . $arrTitle[$index] . '</mark>';
             } else {
-                $strRet .= $arrTitle[$i] . ' ';
+                $marked_title[] = $arrTitle[$index];
             }
         }
-        if ($strRet != '') {
-            $strRet = substr($strRet, 0, -1);
-        }
 
-        return $strRet;
+        return implode(' ', $marked_title);
     }
 
     /**
@@ -96,8 +92,8 @@ class KeywordLibrary
      */
     public static function removeSymbols($text): mixed
     {
-        $text = static::removeSortSentences($text);
-        $text = preg_replace('/[^\w^\d^\.^]+/uis', '', $text);
+        // $text = static::removeSortSentences($text);
+        $text = preg_replace('/[^\w^\d^\.^]+/uis', ' ', $text);
         return preg_replace("/\.+/", '.', $text);
     }
 
