@@ -223,12 +223,11 @@ class KeywordLibrary
     {
         //chuẩn hóa nếu là json
         $keyword    = self::standardTextJson($keyword);
-        $strToSpace = array('+', '=', '_', '.', ',', "–", '\\');
+        $strToSpace = array('+', '=', '_', '.', ',', "–", '\\', "-");
         $strSpecial = array(
             chr(9),
             chr(10),
             chr(13),
-            "-",
             '"',
             ".",
             "?",
