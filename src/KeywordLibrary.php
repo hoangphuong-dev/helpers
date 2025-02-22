@@ -43,8 +43,9 @@ class KeywordLibrary
      * @param $title
      * @return string
      */
-    public static function searchKeyword($key, $title): string
+    public static function searchKeyword(?string $key, string $title): string
     {
+        if (empty($key)) return $title;
         $search_text = mb_strtolower(Formatter::removeAccent($key), "UTF-8");
         $title_lower = mb_strtolower(Formatter::removeAccent($title), "UTF-8");
 
